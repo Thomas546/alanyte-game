@@ -2,7 +2,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 	
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
-    otherSprite.destroy(effects.fire, 500)
+    sprite.destroy(effects.fire, 500)
     info.changeLifeBy(-1)
 })
 info.onLifeZero(function () {
@@ -149,8 +149,8 @@ let mySprite = sprites.create(img`
     . 8 8 f b b c f 8 8 f b b c f . 
     . . . . c f f . . . . c f f . . 
     `, SpriteKind.Player)
-mySprite.setStayInScreen(true)
 controller.moveSprite(mySprite, 100, 100)
+mySprite.setStayInScreen(true)
 info.setLife(3)
 game.onUpdateInterval(1000, function () {
     mySprite2 = sprites.create(img`
