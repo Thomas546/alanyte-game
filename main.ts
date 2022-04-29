@@ -1,5 +1,24 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-	
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 4 4 . . . . . . . 
+        . . . . . . 4 5 5 4 . . . . . . 
+        . . . . . . 2 5 5 2 . . . . . . 
+        . . . . . . . 2 2 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, blu, -100, 0)
+    rosso.destroy(effects.fire, 500)
+    pause(1000)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     sprite.destroy(effects.fire, 500)
@@ -8,7 +27,9 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
 info.onLifeZero(function () {
     game.over(false)
 })
-let mySprite2: Sprite = null
+let rosso: Sprite = null
+let projectile: Sprite = null
+let blu: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999111111111119999999999999999999999999999999999999991111999999999999999999999999999999999999999999111111111111
@@ -131,7 +152,8 @@ scene.setBackgroundImage(img`
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     `)
-let mySprite = sprites.create(img`
+tiles.setCurrentTilemap(tilemap`level1`)
+blu = sprites.create(img`
     . . . . . . . 8 8 8 8 8 . . . . 
     . . . . . 8 8 6 6 6 6 6 8 . . . 
     . . . . 8 8 6 6 6 6 6 6 6 8 . . 
@@ -149,11 +171,11 @@ let mySprite = sprites.create(img`
     . 8 8 f b b c f 8 8 f b b c f . 
     . . . . c f f . . . . c f f . . 
     `, SpriteKind.Player)
-controller.moveSprite(mySprite, 100, 100)
-mySprite.setStayInScreen(true)
+controller.moveSprite(blu, 100, 100)
+blu.setStayInScreen(true)
 info.setLife(3)
 game.onUpdateInterval(1000, function () {
-    mySprite2 = sprites.create(img`
+    rosso = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . 2 2 2 2 2 2 2 2 . . . . 
         . . . 2 4 2 2 2 2 2 2 c 2 . . . 
@@ -171,6 +193,6 @@ game.onUpdateInterval(1000, function () {
         . . . f f f . . . . f f f f . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
-    mySprite2.setPosition(0, randint(20, 120))
-    mySprite2.setVelocity(randint(50, 150), 0)
+    rosso.setPosition(0, randint(20, 120))
+    rosso.setVelocity(randint(50, 150), 0)
 })
