@@ -25,7 +25,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
     info.changeLifeBy(-1)
 })
 info.onLifeZero(function () {
-    game.over(false)
+    game.over(false, effects.dissolve)
 })
 let rosso: Sprite = null
 let projectile: Sprite = null
